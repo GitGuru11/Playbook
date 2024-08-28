@@ -1,0 +1,55 @@
+﻿{
+    "Serilog": {
+        "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File", "Serilog.Sinks.Datadog.Logs" ],
+        "Enrich": [ "FromLogContext" ],
+        "MinimumLevel": {
+            "Default": "Information",
+            "Override": {
+                "Microsoft": "Information",
+                "System": "Information"
+            }
+        },
+        "WriteTo": [
+            { "Name": "Console" },
+            {
+                "Name": "File",
+                "Args": {
+                    "path": "/mnt/log/PlaybookManagement/log.txt",
+                    "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {SourceContext:l} {Message:lj}{NewLine}{Exception}",
+                    "fileSizeLimitBytes": 1024000,
+                    "retainedFileCountLimit": 70,
+                    "rollOnFileSizeLimit": true,
+                    "rollingInterval": "Day"
+                }
+            },
+            {
+                "Name": "DatadogLogs",
+                "Args": {
+                    "apiKey": "5297bb831d30fee82a2dd1eb9853f633",
+                    "url": "https://http-intake.logs.datadoghq.eu"
+                }
+
+            },
+            {
+                "Name": "Email",
+                "Args": {
+                    "connectionInfo": {
+                        "FromEmail": "Notifications@aviso.com",
+                        "ToEmail": "apidev@aviso.com",
+                        "MailServer": "email-smtp.ap-south-1.amazonaws.com",
+                        "EmailSubject": "[Error][Development] Playbookservice Api Log",
+                        "NetworkCredentials": {
+                            "UserName": "__UserName__",
+                            "Password": "__Password__"
+                        },
+                        "Port": 587,
+                        "EnableSsl": true
+                    },
+                    "restrictedToMinimumLevel": "Error",
+                    "batchPostingLimit": 10,
+                    "period": 2
+                }
+            }
+        ]
+    }
+}

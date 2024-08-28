@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClickHouse.Client" Version="7.6.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Playbook.Common\Playbook.Common.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,8 @@
+[
+  {
+    "Name": "dataai",
+    "ClickHouse": "333",
+    "Mongo": "dataai_sync_cache_production-sync",
+    "Shard": "shard0-0"
+  }
+]
